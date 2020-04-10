@@ -9,6 +9,7 @@ export interface SimpleOptions {
   point: string;
   points: string[];
   input: string;
+  showPath: boolean;
 }
 
 export const defaults: SimpleOptions = {
@@ -22,4 +23,5 @@ export const defaults: SimpleOptions = {
   point: '',
   points: [],
   input: '',
+  showPath: true,
 };
