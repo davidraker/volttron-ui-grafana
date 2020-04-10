@@ -43,6 +43,10 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
     }
   };
 
+  onCheckChanged = ({ target }: any) => {
+    this.props.options.showPath = !this.props.options.showPath;
+    this.forceUpdate();
+  };
   testAddress = () => {
     var myObj = this;
 
@@ -75,14 +79,15 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
     }
   };
 
-  getPlatforms = () => {
+  getPlatforms = (e: any) => {
     var request = new XMLHttpRequest();
     var myObj = this;
     var body = {
       method: 'get_platforms',
       params: [],
     };
-
+    e.target.reset();
+    
     request.open('POST', this.props.options.web_address + '/drivers', true);
     if (request) {
       request.onload = function() {
@@ -259,6 +264,11 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
             />
           </div>
           <Button type="button" onClick={this.getPlatforms} children={'Retrieve Data'} />
+        </div>
+        <div>
+          <h5 className="section-heading">Display Settings</h5>
+          {'Show Path:'}
+          <input type="checkbox" defaultChecked={options.showPath} onChange={this.onCheckChanged} />
         </div>
       </div>
     );
