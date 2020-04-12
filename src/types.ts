@@ -2,6 +2,7 @@ export interface SimpleOptions {
   web_address: string;
   username: string;
   password: string;
+  api_token: string;
   platform: string;
   platforms: string[];
   device: string;
@@ -16,6 +17,7 @@ export const defaults: SimpleOptions = {
   web_address: 'https://alfred:8443',
   username: '',
   password: '',
+  api_token: '',
   platform: '',
   platforms: [],
   device: '',
