@@ -11,6 +11,8 @@ export interface SimpleOptions {
   points: string[];
   input: string;
   showPath: boolean;
+  tooltip: string;
+  title: string;
 }
 
 export const defaults: SimpleOptions = {
@@ -26,4 +28,6 @@ export const defaults: SimpleOptions = {
   points: [],
   input: '',
   showPath: true,
+  tooltip: '',
+  title: 'Default',
 };
