@@ -9,12 +9,29 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
     this.props.onOptionsChange({ ...this.props.options, web_address: target.value });
   };
 
+  onCheckboxClick = (e: any) => {
+    var checkBox = document.getElementById('spCheckBox') as HTMLInputElement;
+    if (checkBox !== null) {
+      if (checkBox.checked === true) {
+        this.props.options.tooltip = 'Path:'.concat(this.props.options.platform, '/', this.props.options.device, '/', this.props.options.point);
+        console.log('Show');
+      } else {
+        this.props.options.tooltip = 'Path:Hidden';
+        console.log('Hide');
+      }
+    }
+  };
+
   onUsernameChanged = ({ target }: any) => {
     this.props.onOptionsChange({ ...this.props.options, username: target.value });
   };
 
   onPasswordChanged = ({ target }: any) => {
     this.props.onOptionsChange({ ...this.props.options, password: target.value });
+  };
+
+  onTitleChanged = ({ target }: any) => {
+    this.props.onOptionsChange({ ...this.props.options, title: target.value });
   };
 
   onTokenChanged = ({ target }: any) => {
@@ -317,7 +334,16 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
           </div>
           <Button type="button" onClick={this.getPlatforms} children={'Retrieve Data'} />
         </div>
+        <div>
+          <div>
+            <h5 className="section-heading">Display Settings</h5>
+            <FormField label="Title" labelWidth={11} inputWidth={22} type="text" onChange={this.onTitleChanged} value={options.title} />
+            <input type="checkbox" defaultChecked={options.showPath} onClick={this.onCheckboxClick} id="spCheckBox" />
+            <label>Show Path</label>
+          </div>
+        </div>
       </div>
     );
   }
 }
+
