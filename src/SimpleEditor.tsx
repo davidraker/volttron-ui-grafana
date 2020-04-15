@@ -9,32 +9,6 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
     this.props.onOptionsChange({ ...this.props.options, web_address: target.value });
   };
 
-  onCheckboxClick = (e: any) => {
-    var checkBox = document.getElementById('spCheckBox') as HTMLInputElement;
-    if (checkBox !== null) {
-      this.onToolTipChanged(checkBox.checked);
-      this.props.onOptionsChange({ ...this.props.options, showPath: checkBox.checked });
-    } else {
-      this.props.onOptionsChange({ ...this.props.options, showPath: false });
-      this.onToolTipChanged(false);
-    }
-    console.log('Checked: ', checkBox.checked);
-  };
-
-  onToolTipChanged = (isChecked: boolean) => {
-    if (isChecked) {
-      this.props.onOptionsChange({
-        ...this.props.options,
-        tooltip: 'Path:'.concat(this.props.options.platform, '/', this.props.options.device, '/', this.props.options.point),
-      });
-      console.log('1-        ', this.props.options.tooltip);
-    } else {
-      this.props.options.tooltip = 'Path:Hidden';
-      this.props.onOptionsChange({ ...this.props.options, tooltip: 'Path:Hidden' });
-      console.log('2-        ', this.props.options.tooltip);
-    }
-  };
-
   onUsernameChanged = ({ target }: any) => {
     this.props.onOptionsChange({ ...this.props.options, username: target.value });
   };
@@ -351,8 +325,6 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
           <div>
             <h5 className="section-heading">Display Settings</h5>
             <FormField label="Title" labelWidth={11} inputWidth={22} type="text" onChange={this.onTitleChanged} value={options.title} />
-            <input type="checkbox" defaultChecked={options.showPath} onClick={this.onCheckboxClick} id="spCheckBox" />
-            <label>Show Path</label>
           </div>
         </div>
       </div>
