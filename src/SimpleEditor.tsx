@@ -12,13 +12,26 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
   onCheckboxClick = (e: any) => {
     var checkBox = document.getElementById('spCheckBox') as HTMLInputElement;
     if (checkBox !== null) {
-      if (checkBox.checked === true) {
-        this.props.options.tooltip = 'Path:'.concat(this.props.options.platform, '/', this.props.options.device, '/', this.props.options.point);
-        console.log('Show');
-      } else {
-        this.props.options.tooltip = 'Path:Hidden';
-        console.log('Hide');
-      }
+      this.onToolTipChanged(checkBox.checked);
+      this.props.onOptionsChange({ ...this.props.options, showPath: checkBox.checked });
+    } else {
+      this.props.onOptionsChange({ ...this.props.options, showPath: false });
+      this.onToolTipChanged(false);
+    }
+    console.log('Checked: ', checkBox.checked);
+  };
+
+  onToolTipChanged = (isChecked: boolean) => {
+    if (isChecked) {
+      this.props.onOptionsChange({
+        ...this.props.options,
+        tooltip: 'Path:'.concat(this.props.options.platform, '/', this.props.options.device, '/', this.props.options.point),
+      });
+      console.log('1-        ', this.props.options.tooltip);
+    } else {
+      this.props.options.tooltip = 'Path:Hidden';
+      this.props.onOptionsChange({ ...this.props.options, tooltip: 'Path:Hidden' });
+      console.log('2-        ', this.props.options.tooltip);
     }
   };
 
@@ -346,4 +359,3 @@ export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>>
     );
   }
 }
-
